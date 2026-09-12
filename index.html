@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHARK CAT ($SHARKCAT)</title>
+<meta name="description" content="SHARK CAT — soft paws, sharp bite. The costume cat that swallowed the tank.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1D5FD6;
+    --navy-2:#12408F;
+    --navy-3:#0E3573;
+    --cyan:#5CC8E8;
+    --cyan-dark:#2E93B3;
+    --white:#FFFFFF;
+    --paper:#FFFFFF;
+    --pink:#F4A7C0;
+    --ink:#0B2A55;
+    --ink-soft:#4A6482;
+    --radius:18px;
+    --wrap:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Baloo 2',sans-serif;
+    line-height:1.05;
+    margin:0;
+  }
+  p{line-height:1.6;color:var(--ink-soft);}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important;}
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline:3px solid var(--cyan-dark);
+    outline-offset:2px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(18,64,143,0.92);
+    backdrop-filter:blur(8px);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Baloo 2',sans-serif; font-weight:700; font-size:20px; color:var(--white);
+  }
+  .brand .fin{
+    width:30px; height:30px;
+    background:var(--cyan);
+    clip-path:polygon(50% 0%, 100% 100%, 0% 100%);
+    display:inline-block;
+  }
+  nav.links{display:flex; gap:28px;}
+  nav.links a{color:#CFE8EF; font-size:15px; font-weight:500; transition:color .15s;}
+  nav.links a:hover{color:var(--cyan);}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:11px 22px; border-radius:999px; font-weight:700; font-size:15px;
+    border:2px solid transparent; cursor:pointer; transition:transform .12s ease, background .15s;
+    font-family:'Inter',sans-serif;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--cyan); color:var(--navy);}
+  .btn-primary:hover{background:#4FDCEB;}
+  .btn-ghost{background:transparent; border-color:rgba(255,255,255,0.35); color:var(--white);}
+  .btn-ghost:hover{border-color:var(--cyan); color:var(--cyan);}
+  .nav-cta{display:flex; gap:12px; align-items:center;}
+  .menu-toggle{display:none; background:none; border:none; color:var(--white); font-size:26px; cursor:pointer;}
+
+  /* ---------- TICKER ---------- */
+  .ticker{
+    background:var(--navy-2);
+    overflow:hidden; white-space:nowrap; border-top:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .ticker-track{
+    display:inline-block; padding:10px 0;
+    animation:scroll 26s linear infinite;
+    font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.04em; color:var(--cyan);
+  }
+  .ticker-track span{margin:0 28px;}
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:var(--white);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-inner{
+    display:grid; grid-template-columns:1.05fr 0.95fr; align-items:center; gap:40px;
+    padding:76px 24px 60px;
+  }
+  .hero-eyebrow{
+    display:inline-block; font-size:14px; color:var(--cyan); font-weight:600; margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:clamp(40px, 5.4vw, 68px); color:var(--white); font-weight:800;
+  }
+  .hero h1 .accent{color:var(--cyan);}
+  .hero p.lead{
+    color:#C7DEEA; font-size:18px; max-width:480px; margin-top:18px;
+  }
+  .hero-actions{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;}
+  .ca-box{
+    margin-top:26px; display:flex; align-items:center; gap:12px;
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14);
+    border-radius:14px; padding:12px 16px; max-width:520px;
+  }
+  .ca-box .ca-label{font-size:12px; color:#9FC0D2; font-weight:600; white-space:nowrap;}
+  .ca-box code{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--white);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1;
+  }
+  .copy-btn{
+    background:var(--cyan); color:var(--navy); border:none; border-radius:8px;
+    padding:7px 12px; font-weight:700; font-size:12px; cursor:pointer; white-space:nowrap;
+  }
+  .copy-btn:hover{background:#4FDCEB;}
+
+  .hero-art{position:relative; display:flex; justify-content:center;}
+  .hero-art .plate{
+    position:absolute; width:380px; height:380px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, rgba(47,198,216,0.35), rgba(47,198,216,0) 70%);
+    filter:blur(2px);
+  }
+  .hero-art img{
+    position:relative; width:100%; max-width:420px; border-radius:28px;
+  }
+
+  .wave{display:block; width:100%; line-height:0;}
+  .wave svg{display:block; width:100%; height:auto;}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{padding:84px 24px;}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-head .kicker{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:0.03em; color:var(--cyan-dark); font-weight:600;
+  }
+  .section-head h2{font-size:clamp(30px,3.6vw,44px); margin-top:8px; color:var(--navy);}
+  .section-on-navy{background:var(--navy); color:var(--white);}
+  .section-on-navy .section-head h2{color:var(--white);}
+  .section-on-navy p{color:#BFDCE8;}
+
+  /* ---------- LORE ---------- */
+  .lore-grid{display:grid; grid-template-columns:0.95fr 1.05fr; gap:56px; align-items:start;}
+  .lore-steps{display:flex; flex-direction:column; gap:0;}
+  .lore-step{
+    display:grid; grid-template-columns:44px 1fr; gap:18px; padding:22px 0; position:relative;
+  }
+  .lore-step:not(:last-child)::after{
+    content:''; position:absolute; left:21px; top:56px; bottom:-6px; width:2px;
+    background:linear-gradient(var(--cyan), transparent);
+  }
+  .lore-num{
+    width:44px; height:44px; border-radius:50%; background:var(--navy);
+    color:var(--cyan); font-family:'Baloo 2',sans-serif; font-weight:700; font-size:16px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .lore-step h3{font-size:19px; margin-bottom:6px; color:var(--navy);}
+  .lore-step p{font-size:15px; margin:0;}
+  .lore-card{
+    background:var(--navy); color:var(--white); border-radius:24px; padding:36px;
+    position:sticky; top:100px;
+  }
+  .lore-card .quote-mark{font-family:'Baloo 2'; font-size:48px; color:var(--cyan); line-height:1;}
+  .lore-card p{color:#DCEFF5; font-size:17px; margin-top:10px;}
+  .lore-card .attribution{margin-top:18px; font-size:13px; color:#8FB6C9; font-weight:600;}
+
+  /* ---------- PROOF (tweets) ---------- */
+  .proof-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:28px;}
+  .proof-note{
+    grid-column:1 / -1; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.2);
+    border-radius:14px; padding:16px 20px; font-size:13.5px; color:#9FC0D2;
+  }
+  .tweet-embed-wrap{background:var(--paper); border-radius:16px; overflow:hidden; min-height:220px;}
+
+  /* ---------- CHART ---------- */
+  .chart-panel{
+    background:var(--navy-2); border-radius:24px; padding:22px; border:1px solid rgba(255,255,255,0.08);
+  }
+  .chart-panel .chart-topbar{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    margin-bottom:16px;
+  }
+  .chart-panel .chart-topbar .pair{font-family:'JetBrains Mono',monospace; color:var(--cyan); font-size:13px;}
+  .chart-frame{
+    width:100%; height:520px; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.1);
+    background:#0d1720;
+  }
+  .chart-frame iframe{width:100%; height:100%; border:0;}
+  .stat-row{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:16px;}
+  .stat{background:rgba(255,255,255,0.05); border-radius:12px; padding:14px 16px;}
+  .stat .label{font-size:12px; color:#9FC0D2;}
+  .stat .value{font-family:'Baloo 2'; font-size:20px; color:var(--white); margin-top:4px;}
+
+  /* ---------- ROADMAP ---------- */
+  .roadmap-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .phase-card{
+    background:var(--paper); border-radius:22px; padding:30px;
+    border:1px solid #E3EEF2; position:relative;
+  }
+  .phase-card .phase-num{
+    font-family:'Baloo 2'; font-size:14px; color:var(--cyan-dark); font-weight:700; letter-spacing:0.02em;
+  }
+  .phase-card h3{font-size:21px; margin-top:10px; color:var(--navy);}
+  .phase-card p{font-size:15px; margin-top:10px;}
+  .phase-card.active{background:var(--navy); color:var(--white); border-color:var(--navy);}
+  .phase-card.active h3{color:var(--white);}
+  .phase-card.active p{color:#C7DEEA;}
+  .phase-card.active .phase-num{color:var(--cyan);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--navy); color:#8FB6C9; padding:48px 24px 28px;}
+  .footer-inner{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; align-items:center;}
+  .footer-links{display:flex; gap:22px; flex-wrap:wrap;}
+  .footer-links a{color:#BFDCE8; font-size:14px; font-weight:500;}
+  .footer-links a:hover{color:var(--cyan);}
+  .footer-bottom{
+    max-width:var(--wrap); margin:28px auto 0; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08);
+    font-size:12.5px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+    .hero-inner{grid-template-columns:1fr; text-align:left;}
+    .hero-art{order:-1;}
+    .hero-art img{max-width:280px; margin:0 auto;}
+    .lore-grid{grid-template-columns:1fr;}
+    .lore-card{position:static;}
+    .proof-grid{grid-template-columns:1fr;}
+    .roadmap-grid{grid-template-columns:1fr;}
+    .stat-row{grid-template-columns:repeat(2,1fr);}
+    .footer-inner{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="fin"></span> SHARK CAT</div>
+    <nav class="links">
+      <a href="#lore">Lore</a>
+      <a href="#proof">Spotted</a>
+      <a href="#chart">Chart</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Buy $SHARKCAT</a>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>$SHARKCAT</span><span>SOFT PAWS, SHARP BITE</span><span>NEVER TAKES THE COSTUME OFF</span><span>APEX PREDATOR OF THE TANK</span><span>$SHARKCAT</span><span>SOFT PAWS, SHARP BITE</span><span>NEVER TAKES THE COSTUME OFF</span><span>APEX PREDATOR OF THE TANK</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="hero-eyebrow">Now swimming on Ethereum</span>
+      <h1>Soft paws.<br><span class="accent">Sharp bite.</span></h1>
+      <p class="lead">A house cat found a shark costume, zipped itself in, and never came back out. Now it runs the tank. This is $SHARKCAT.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Buy $SHARKCAT</a>
+        <a class="btn btn-ghost" href="#chart">View Chart</a>
+      </div>
+      <div class="ca-box">
+        <span class="ca-label">CONTRACT</span>
+        <code id="ca-address">0x0000000000000000000000000000000000dead</code>
+        <button class="copy-btn" id="copy-ca">Copy</button>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="plate"></div>
+      <img src="images/shark-cat-cutout.png" alt="A cat wearing a shark costume, mouth open, sitting" style="filter:drop-shadow(0 22px 30px rgba(5,25,60,0.35));">
+    </div>
+  </div>
+  <div class="wave">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,40 C 240,90 480,0 720,30 C 960,60 1200,10 1440,40 L1440,90 L0,90 Z" fill="#FFFFFF"></path></svg>
+  </div>
+</section>
+
+<!-- LORE -->
+<section class="section" id="lore">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">ORIGIN STORY</span>
+      <h2>How a tabby became the tank's top predator</h2>
+      <p>No CEOs, no real cats harmed — just a costume that stuck.</p>
+    </div>
+    <div class="lore-grid">
+      <div class="lore-steps">
+        <div class="lore-step">
+          <div class="lore-num">1</div>
+          <div><h3>The box arrives</h3><p>A shark costume shows up in the mail, ordered by a household member who insists it "isn't for the cat."</p></div>
+        </div>
+        <div class="lore-step">
+          <div class="lore-num">2</div>
+          <div><h3>The zip closes</h3><p>The cat climbs in for the photo, the zipper catches, and something in its posture changes. It stops meowing. It starts stalking.</p></div>
+        </div>
+        <div class="lore-step">
+          <div class="lore-num">3</div>
+          <div><h3>The costume stays on</h3><p>Three weeks later, it still hasn't come off. The cat now answers only to Shark Cat, and refuses to be seen without the fin.</p></div>
+        </div>
+        <div class="lore-step">
+          <div class="lore-num">4</div>
+          <div><h3>The chart opens its mouth</h3><p>The community mints $SHARKCAT in its honor. The mouth on the chart opens wider with every buy.</p></div>
+        </div>
+      </div>
+      <div class="lore-card">
+        <span class="quote-mark">"</span>
+        <p>It used to be scared of the vacuum cleaner. Now it just watches the candles turn green and doesn't blink.</p>
+        <div class="attribution">— the household member who bought the costume</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF / SPOTTED -->
+<section class="section section-on-navy" id="proof">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" style="color:var(--cyan);">SPOTTED IN THE WILD</span>
+      <h2>The internet already knows the bite</h2>
+      <p>Real posts, real reach — swap these embeds for your own community screenshots as they roll in.</p>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-note">These two embeds are placeholders pulled live from X so you can see the format — replace the tweet URLs below with real $SHARKCAT posts once the community starts posting.</div>
+      <div class="tweet-embed-wrap">
+        <blockquote class="twitter-tweet" data-theme="light">
+          <a href="https://twitter.com/roblox/status/1159502211375861761"></a>
+        </blockquote>
+      </div>
+      <div class="tweet-embed-wrap">
+        <blockquote class="twitter-tweet" data-theme="light">
+          <a href="https://twitter.com/roblox/status/1016846553800048640"></a>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHART -->
+<section class="section" id="chart" style="background:var(--navy); padding-top:0;">
+  <div class="wrap">
+    <div class="section-head" style="color:var(--white);">
+      <span class="kicker" style="color:var(--cyan);">LIVE MARKET</span>
+      <h2 style="color:var(--white);">Watch the mouth open</h2>
+      <p>Placeholder chart below — swap in your real pair address on Dexscreener once $SHARKCAT is live.</p>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-topbar">
+        <span class="pair">SHARKCAT / ETH · Uniswap v4</span>
+        <a class="btn btn-ghost" style="padding:8px 16px; font-size:13px;" href="#" target="_blank" rel="noopener">Open on Dexscreener</a>
+      </div>
+      <div class="chart-frame">
+        <iframe
+          src="https://dexscreener.com/ethereum/REPLACE_WITH_PAIR_ADDRESS?embed=1&theme=dark&trades=0&info=0"
+          title="SHARKCAT live chart"
+          loading="lazy">
+        </iframe>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="label">Price</div><div class="value">$0.00</div></div>
+        <div class="stat"><div class="label">Liquidity</div><div class="value">$0</div></div>
+        <div class="stat"><div class="label">Market Cap</div><div class="value">$0</div></div>
+        <div class="stat"><div class="label">Holders</div><div class="value">0</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section" id="roadmap">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">THE PATH</span>
+      <h2>Three phases to full tank control</h2>
+    </div>
+    <div class="roadmap-grid">
+      <div class="phase-card active">
+        <div class="phase-num">PHASE 1</div>
+        <h3>The Zip-Up</h3>
+        <p>Fair launch, liquidity lock, contract renounced, and the costume officially never comes off.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">PHASE 2</div>
+        <h3>The Feeding Frenzy</h3>
+        <p>Meme raids, Dexscreener trending push, first CEX listing applications.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">PHASE 3</div>
+        <h3>Tank Dominance</h3>
+        <p>Merch drop, community-voted charity fin fund, and a permanent seat at the top of the food chain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="brand"><span class="fin"></span> SHARK CAT</div>
+    <div class="footer-links">
+      <a href="#" target="_blank" rel="noopener">X / Twitter</a>
+      <a href="#" target="_blank" rel="noopener">Telegram</a>
+      <a href="#" target="_blank" rel="noopener">Dexscreener</a>
+      <a href="#" target="_blank" rel="noopener">Buy Now</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Shark Cat. Community-made meme project — not financial advice.</span>
+    <span id="ca-footer">CA: 0x0000000000000000000000000000000000dead</span>
+  </div>
+</footer>
+
+<script src="https://platform.twitter.com/widgets.js" charset="utf-8" async></script>
+<script>
+  document.getElementById('copy-ca').addEventListener('click', function(){
+    const text = document.getElementById('ca-address').textContent;
+    navigator.clipboard.writeText(text).then(function(){
+      const btn = document.getElementById('copy-ca');
+      const original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function(){ btn.textContent = original; }, 1500);
+    });
+  });
+</script>
+
+</body>
+</html>
